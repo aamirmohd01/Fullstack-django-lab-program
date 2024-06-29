@@ -3,6 +3,11 @@
 3. **lab6** => home page, layout, contactus
 4. **lab7** => student registration
 5. **lab8** => AdminInterface to add or change student details
+6. **lab9** => Model Form for student project
+7. **lab10** => Generic class view and detailed view of of student 
+8. **lab11** => CSV and PDF generation for models
+9. **lab12** => Registration Page for student enrolment
+10. **lab13** => Search application in Django using AJAX
 
 
 
