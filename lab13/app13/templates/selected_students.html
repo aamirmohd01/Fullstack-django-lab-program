@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Students</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Student USN</th>
+                <th>Semester</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in student_list %}
+            <tr>
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.student_usn }}</td>
+                <td>{{ student.student_sem }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

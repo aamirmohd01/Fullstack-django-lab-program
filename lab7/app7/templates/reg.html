@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        Student Name
+        <select name="sname">
+            {% for student in students %}
+            <option value="{{student.id}}">{{student.student_name}}</option>
+            {% endfor %}
+        </select><br>
+        Course Name
+        <select name="cname">
+            {% for course in courses %}
+            <option value="{{course.id}}">{{course.course_name}}</option>
+            {% endfor %}
+        </select><br>
+        <input type="submit" value="Enroll">
+    </form>
+</body>
+</html>

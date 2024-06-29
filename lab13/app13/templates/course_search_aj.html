@@ -1,0 +1,44 @@
+{% load static %}
+<html>
+<head>
+    <title>Course Search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Replace with the latest version of jQuery CDN if needed -->
+</head>
+<body>
+    <form method="POST" action="">
+        {% csrf_token %}
+        Courses:
+        <select name="cname" id="cname">
+            {% for course in courses %}
+            <option value="{{ course.id }}">{{ course.course_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="button" value="Search" id="serbtn">
+        <span id="result"></span>
+    </form>
+
+    <script>
+        $(document).ready(function(){
+            $("#serbtn").click(function(){
+                var cname = $("#cname").val();
+                $.ajax({
+                    url: "/course_search_ajax/",
+                    type: "POST",
+                    data: {
+                        cname: cname,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    success: function(response){
+                        $("#result").html(response);
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.error("AJAX Error:", errorThrown);
+                        $("#result").html("<span style='color:red;'>AJAX Error occurred. Please try again later.</span>");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

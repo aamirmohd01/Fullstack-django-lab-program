@@ -1,0 +1,50 @@
+{% load static %}
+<html>
+<body>
+    <form method="post" action="">
+        {% csrf_token %}
+        Student Name
+        <select name="sname" id="sname">
+            {% for student in students %}
+            <option value="{{ student.id }}">{{ student.student_name }}</option>
+            {% endfor %}
+        </select><br>
+        Course Name
+        <select name="cname" id="cname">
+            {% for course in courses %}
+            <option value="{{ course.id }}">{{ course.course_name }}</option>
+            {% endfor %}
+        </select><br>
+        <span id="ans"></span>
+        <input type="button" value="Enroll" id="ebtn">
+    </form>
+    
+    <!-- Include jQuery from CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+            $("#ebtn").click(function () {
+                var sname = $("#sname").val();
+                var cname = $("#cname").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/regaj/",
+                    data: {
+                        sname: sname,
+                        cname: cname,
+                        csrfmiddlewaretoken: "{{ csrf_token }}"
+                    },
+                    success: function (response) {
+                        $("#ans").html(response);  // Updating #ans with server response
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.error("AJAX Error:", errorThrown);
+                        $("#ans").html("<span style='color:red;'>AJAX Error occurred. Please try again later.</span>");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
